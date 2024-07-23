@@ -19,6 +19,9 @@
 # misc
 .DS_Store
 *.pem
+*.log
+*.tmp
+*.swp
 
 # debug
 npm-debug.log*
@@ -34,3 +37,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE
+.vscode/
+
+# local env files
+.env*.local
+
+# docker
+docker-compose.override.yml
+Dockerfile*
+
