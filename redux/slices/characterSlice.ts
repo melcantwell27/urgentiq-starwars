@@ -3,15 +3,13 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { fetchCharacters, fetchPlanet } from '../../services/api';
 import { Character, Planet } from '../../types';
 
-// Regular expression to extract the last integer from the URL
-const speciesIdRegex = /\/species\/(\d+)\/$/;
 
 export const fetchAllCharacters = createAsyncThunk(
   'characters/fetchAll',
   async (page: number) => {
     // Fetch character data from the API for the given page
     const response = await fetchCharacters(page);
-    return response.results;
+    return { results: response.results, count: response.count };
   }
 );
 
@@ -33,6 +31,9 @@ const characterSlice = createSlice({
     selectedCharacter: null as string | null,
     homeworld: null as Planet | null,
     homeworldStatus: 'idle' as 'idle' | 'loading' | 'succeeded' | 'failed',
+    count: 0,
+    page: 1,
+    pageCount: 1,
   },
   reducers: {
     setSelectedCharacter: (state, action: PayloadAction<string>) => {
@@ -45,6 +46,9 @@ const characterSlice = createSlice({
       state.homeworld = null;
       state.homeworldStatus = 'idle';
     },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -53,7 +57,9 @@ const characterSlice = createSlice({
       })
       .addCase(fetchAllCharacters.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.characters = action.payload;
+        state.characters = action.payload.results;
+        state.count = action.payload.count;
+        state.pageCount = Math.ceil(action.payload.count / 10);
       })
       .addCase(fetchAllCharacters.rejected, (state, action) => {
         state.status = 'failed';
@@ -73,5 +79,5 @@ const characterSlice = createSlice({
   },
 });
 
-export const { setSelectedCharacter, clearSelectedCharacter } = characterSlice.actions;
+export const { setSelectedCharacter, clearSelectedCharacter, setPage } = characterSlice.actions;
 export default characterSlice.reducer;
