@@ -3,12 +3,16 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { fetchCharacters, fetchPlanet } from '../../services/api';
 import { Character, Planet } from '../../types';
 
+interface FetchCharactersParams {
+    page: number;
+    search?: string;
+  }
 
 export const fetchAllCharacters = createAsyncThunk(
   'characters/fetchAll',
-  async (page: number) => {
+  async ({ page, search }: FetchCharactersParams) => {
     // Fetch character data from the API for the given page
-    const response = await fetchCharacters(page);
+    const response = await fetchCharacters(page, search);
     return { results: response.results, count: response.count };
   }
 );
@@ -34,6 +38,7 @@ const characterSlice = createSlice({
     count: 0,
     page: 1,
     pageCount: 1,
+    search: '',
   },
   reducers: {
     setSelectedCharacter: (state, action: PayloadAction<string>) => {
@@ -49,6 +54,9 @@ const characterSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
+    setSearch: (state, action: PayloadAction<string>) => {
+        state.search = action.payload;
+      },
   },
   extraReducers: (builder) => {
     builder
@@ -79,5 +87,5 @@ const characterSlice = createSlice({
   },
 });
 
-export const { setSelectedCharacter, clearSelectedCharacter, setPage } = characterSlice.actions;
+export const { setSelectedCharacter, clearSelectedCharacter, setPage, setSearch } = characterSlice.actions;
 export default characterSlice.reducer;

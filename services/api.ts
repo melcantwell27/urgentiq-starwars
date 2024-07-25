@@ -3,8 +3,8 @@
 // services/api.ts
 import { Planet } from '../types';
 
-export const fetchCharacters = async (page: number) => {
-  const response = await fetch(`https://swapi.dev/api/people/?page=${page}`);
+export const fetchCharacters = async (page: number, search: string = '') => {
+  const response = await fetch(`https://swapi.dev/api/people/?page=${page}&search=${search}`);
   const data = await response.json();
   return data;
 };
