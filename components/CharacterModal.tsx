@@ -29,35 +29,38 @@ const CharacterModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-black p-6 rounded-lg shadow-lg max-w-lg w-full relative">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60">
+      <div className="bg-[#B3D9FF] p-6 rounded-lg shadow-lg max-w-lg w-full relative border border-[#003B5C]">
         <button
-          className="absolute top-4 right-4 text-xl font-bold"
+          className="absolute top-4 right-4 text-xl font-bold text-[#003B5C] hover:text-black"
           onClick={handleClose}
         >
           &times;
         </button>
-        <h2 className="text-2xl font-bold mb-4">{character.name}</h2>
-        <p><strong>Height:</strong> {(parseInt(character.height) / 100).toFixed(2)} m</p>
-        <p><strong>Mass:</strong> {character.mass} kg</p>
-        <p><strong>Birth Year:</strong> {character.birth_year}</p>
-        <p><strong>Number of Films:</strong> {character.films.length}</p>
-        <p><strong>Date Added:</strong> {dayjs(character.created).format('DD-MM-YYYY')}</p>
+        <h2 className="text-2xl font-bold mb-4 text-[#003B5C] border-b border-[#003B5C] pb-2">{character.name}</h2>
+        <div>
+          <p className="text-lg text-[#003B5C]"><strong>Height:</strong> {(parseInt(character.height) / 100).toFixed(2)} m</p>
+          <p className="text-lg text-[#003B5C]"><strong>Mass:</strong> {character.mass} kg</p>
+          <p className="text-lg text-[#003B5C]"><strong>Birth Year:</strong> {character.birth_year}</p>
+          <p className="text-lg text-[#003B5C]"><strong>Number of Films:</strong> {character.films.length}</p>
+          <p className="text-lg text-[#003B5C]"><strong>Date Added:</strong> {dayjs(character.created).format('DD-MM-YYYY')}</p>
 
-        {homeworldStatus === 'loading' && <p>Loading homeworld data...</p>}
-        {homeworldStatus === 'succeeded' && homeworld && (
-          <>
-            <h3 className="text-xl font-semibold mt-4">Homeworld</h3>
-            <p><strong>Name:</strong> {homeworld.name}</p>
-            <p><strong>Terrain:</strong> {homeworld.terrain}</p>
-            <p><strong>Climate:</strong> {homeworld.climate}</p>
-            <p><strong>Residents:</strong> {homeworld.population} residents</p>
-          </>
-        )}
-        {homeworldStatus === 'failed' && <p>Failed to load homeworld data.</p>}
+          {homeworldStatus === 'loading' && <p className="text-lg text-[#003B5C]">Loading homeworld data...</p>}
+          {homeworldStatus === 'succeeded' && homeworld && (
+            <div className="border-t border-[#003B5C] pt-4 mt-4">
+              <h3 className="text-xl font-semibold mb-2 text-[#003B5C]">Homeworld</h3>
+              <p className="text-lg text-[#003B5C]"><strong>Name:</strong> {homeworld.name}</p>
+              <p className="text-lg text-[#003B5C]"><strong>Terrain:</strong> {homeworld.terrain}</p>
+              <p className="text-lg text-[#003B5C]"><strong>Climate:</strong> {homeworld.climate}</p>
+              <p className="text-lg text-[#003B5C]"><strong>Residents:</strong> {homeworld.population} residents</p>
+            </div>
+          )}
+          {homeworldStatus === 'failed' && <p className="text-lg text-[#003B5C]">Failed to load homeworld data.</p>}
+        </div>
       </div>
     </div>
   );
 };
+
 
 export default CharacterModal;
