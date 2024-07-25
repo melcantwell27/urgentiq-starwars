@@ -31,3 +31,25 @@ body {
     text-wrap: balance;
   }
 }
+
+.pagination-custom .MuiPaginationItem-root {
+  background-color: #2c2c2e; /* Dark background for pagination items */
+  color: white; /* White text for readability */
+  border: 1px solid #2c2c2e; /* Dark border */
+}
+
+.pagination-custom .MuiPaginationItem-root.Mui-selected {
+  background-color: gold; /* Gold background for the selected page */
+  color: black; /* Dark text on gold background for contrast */
+  border-color: gold; /* Gold border for selected item */
+}
+
+.pagination-custom .MuiPaginationItem-previousNext {
+  background-color: #2c2c2e; /* Dark background for previous/next buttons */
+  color: white; /* White text */
+  border: 1px solid #2c2c2e; /* Dark border */
+}
+
+.pagination-custom .MuiPaginationItem-previousNext.Mui-disabled {
+  color: #6e6e6e; /* Light grey for disabled state */
+}

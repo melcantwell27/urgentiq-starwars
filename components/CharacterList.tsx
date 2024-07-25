@@ -44,7 +44,15 @@ const CharacterList: React.FC = () => {
       {selectedCharacter && <CharacterModal />}
 
       <div className="flex justify-center my-4">
-        <Pagination count={pageCount} page={page} onChange={handlePageChange} color="primary" style={{ backgroundColor: 'gold' }}/>
+      <div className="flex justify-center my-4">
+        <Pagination
+          count={pageCount}
+          page={page}
+          onChange={handlePageChange}
+          color="primary"
+          className="pagination-custom"
+        />
+      </div>
       </div>
     </>
   );
