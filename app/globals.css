@@ -53,3 +53,35 @@ body {
 .pagination-custom .MuiPaginationItem-previousNext.Mui-disabled {
   color: #6e6e6e; /* Light grey for disabled state */
 }
+
+body {
+  background: url('/images/starfield.png') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: relative;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  z-index: 50; /* Ensure it is above the content */
+  width: 100%;
+  padding: 1rem 0; /* Adjust padding as needed */
+}
+
+/* Pseudo-element to prevent content visibility under the header */
+header::before {
+  content: '';
+  position: absolute;
+  top: -100px; /* Adjust to cover enough area */
+  left: 0;
+  width: 100%;
+  height: calc(100% + 100px); /* Ensure it covers entire header and extends beyond */
+  background: rgba(0, 0, 0, 0.6); /* Same opacity as the header background */
+  z-index: -1; /* Place it behind the header content */
+}
+
+main {
+  padding: 0 1rem; /* Padding for the main content area */
+}

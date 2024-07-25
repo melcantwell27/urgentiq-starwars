@@ -32,13 +32,14 @@ const RootLayout = ({ children }: RootLayoutProps) => {
     <html lang="en">
       <body className="min-h-screen bg-black text-white">
         <Provider store={store}>
-        <header className="sticky top-0 bg-black text-white z-50 flex flex-col items-center py-1 pb-1">
-            <h1 className="text-4xl font-extrabold text-center  text-gold" style={{ fontFamily: 'StarWars, sans-serif' }}>
+          <header className="sticky top-0 z-50 flex flex-col items-center py-2">
+            <h1 className="text-4xl font-extrabold text-center 
+             text-gold" style={{ fontFamily: 'StarWars, sans-serif' }}>
               Star Wars Galactic Hub
             </h1>
             <SearchBar />
           </header>
-          <main className="pt-2"> {/* Adjust padding-top to ensure content is not hidden under fixed elements */}
+          <main className="pt-1 pb-4"> {/* Padding adjusted for proper layout */}
             {children}
           </main>
         </Provider>
@@ -46,5 +47,4 @@ const RootLayout = ({ children }: RootLayoutProps) => {
     </html>
   );
 };
-
 export default RootLayout;
