@@ -5,6 +5,8 @@ import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 import './globals.css';
+import SearchBar from '../components/SearchBar'; // Import SearchBar component
+
 
 // Define the props for the RootLayout component
 interface RootLayoutProps {
@@ -12,13 +14,33 @@ interface RootLayoutProps {
 }
 
 // wrap the children in the RootLayout component & makes store available to children
+// const RootLayout = ({ children }: RootLayoutProps) => {
+//   return (
+//     <html lang="en">
+//       <body>
+//         <Provider store={store}>
+//           {/* children: any component that needs access to the store */}
+//           {children} 
+//         </Provider>
+//       </body>
+//     </html>
+//   );
+// };
+
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen bg-black text-white">
         <Provider store={store}>
-          {/* children: any component that needs access to the store */}
-          {children} 
+        <header className="sticky top-0 bg-black text-white z-50 flex flex-col items-center py-1 pb-1">
+            <h1 className="text-4xl font-extrabold text-center  text-gold" style={{ fontFamily: 'StarWars, sans-serif' }}>
+              Star Wars Galactic Hub
+            </h1>
+            <SearchBar />
+          </header>
+          <main className="pt-2"> {/* Adjust padding-top to ensure content is not hidden under fixed elements */}
+            {children}
+          </main>
         </Provider>
       </body>
     </html>

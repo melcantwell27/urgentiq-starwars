@@ -35,8 +35,8 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center my-4 space-x-4">
-      <div className="relative">
+    <div className="flex flex-col items-center my-4 space-y-2">
+      <div className="relative w-full max-w-md">
         <TextField
           label="Search Characters"
           variant="outlined"
