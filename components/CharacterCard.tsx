@@ -8,15 +8,20 @@ import { setSelectedCharacter } from '../redux/slices/characterSlice';
 import { speciesColors } from '../constants/speciesColors'; // Import the species color constants
 
 
+// type definition for CharacterCard props 
 interface CharacterCardProps {
   character: Character;
 }
 
+// CharacterCard component
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   const dispatch = useDispatch();
+  
   // Get the color based on the species ID
   // Default to speciesColors['default] if ID not found
   const cardColor = speciesColors[character.species[0]] || speciesColors['default']; 
+ 
+  // Handle click event to set the selected character
   const handleClick = () => {
     dispatch(setSelectedCharacter(character.name));
   };

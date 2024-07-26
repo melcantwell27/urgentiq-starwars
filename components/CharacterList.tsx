@@ -8,16 +8,18 @@ import { fetchAllCharacters, setPage } from '../redux/slices/characterSlice';
 import CharacterCard from './CharacterCard';
 import CharacterModal from '../components/CharacterModal';
 import Pagination from '@mui/material/Pagination';
-import SearchBar from './SearchBar';
 
 const CharacterList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  // importing data from the redux store, selecting it from the RootState of the store
   const { characters, status, error, selectedCharacter, page, pageCount, search } = useSelector((state: RootState) => state.characters);
 
+  // dispatch character fetch on page load & when user clicks a different page # 
   useEffect(() => {
     dispatch(fetchAllCharacters({ page, search }));
   }, [dispatch, page]);
 
+  // handle page change
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     dispatch(setPage(value));
   };
@@ -32,8 +34,7 @@ const CharacterList: React.FC = () => {
 
   return (
     <>
-      {/* <SearchBar /> */}
-      
+      {/* Render the CharacterCard component for each character in the characters array */}
       <div className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {characters.map((character) => (
           <CharacterCard key={character.name} character={character} />

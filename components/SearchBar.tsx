@@ -8,19 +8,24 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBar: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  // importing data from the redux store, selecting it from the RootState of the store
   const searchTerm = useSelector((state: RootState) => state.characters.search);
+  // state to hold the search term
   const [inputValue, setInputValue] = useState(searchTerm);
 
+  // handle search change
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
+  // handle search submit
   const handleSearchSubmit = () => {
     dispatch(setSearch(inputValue));
     dispatch(setPage(1)); // Reset to the first page on search
     dispatch(fetchAllCharacters({ page: 1, search: inputValue }));
   };
 
+  // handle return to all [reset]
   const handleReturnToAll = () => {
     setInputValue('');
     dispatch(setSearch(''));
@@ -28,6 +33,7 @@ const SearchBar: React.FC = () => {
     dispatch(fetchAllCharacters({ page: 1, search: '' }));
   };
 
+  // handle keydown (can submit on enter)
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       handleSearchSubmit();

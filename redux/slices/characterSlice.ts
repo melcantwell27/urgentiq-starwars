@@ -3,11 +3,13 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { fetchCharacters, fetchPlanet } from '../../services/api';
 import { Character, Planet } from '../../types';
 
+// Type definition for FetchCharactersParams
 interface FetchCharactersParams {
     page: number;
     search?: string;
   }
 
+  // Create an async thunk to fetch character data from the API
 export const fetchAllCharacters = createAsyncThunk(
   'characters/fetchAll',
   async ({ page, search }: FetchCharactersParams) => {
@@ -17,6 +19,7 @@ export const fetchAllCharacters = createAsyncThunk(
   }
 );
 
+// Create an async thunk to fetch planet data from the API
 export const fetchCharacterHomeworld = createAsyncThunk(
   'characters/fetchHomeworld',
   async (homeworldUrl: string) => {
@@ -26,6 +29,7 @@ export const fetchCharacterHomeworld = createAsyncThunk(
   }
 );
 
+// /redux/slices/characterSlice.ts
 const characterSlice = createSlice({
   name: 'characters',
   initialState: {

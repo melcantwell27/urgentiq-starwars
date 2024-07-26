@@ -7,13 +7,16 @@ import { RootState, AppDispatch } from '../redux/store';
 import { clearSelectedCharacter, fetchCharacterHomeworld } from '../redux/slices/characterSlice';
 import dayjs from 'dayjs';
 
+// CharacterModal component
 const CharacterModal: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const selectedCharacter = useSelector((state: RootState) => state.characters.selectedCharacter);
-  const character = useSelector((state: RootState) => state.characters.characters.find((char) => char.name === selectedCharacter));
-  const homeworld = useSelector((state: RootState) => state.characters.homeworld);
-  const homeworldStatus = useSelector((state: RootState) => state.characters.homeworldStatus);
 
+// importing data from the redux store, selecting it from the RootState of the store
+const { selectedCharacter, characters, homeworld, homeworldStatus } = useSelector((state: RootState) => state.characters);
+const character = characters.find((char) => char.name === selectedCharacter);
+
+
+// fetch homeworld on modal open
   useEffect(() => {
     if (selectedCharacter) {
       if (character) {
@@ -24,6 +27,7 @@ const CharacterModal: React.FC = () => {
 
   if (!character) return null;
 
+  // handle close modal
   const handleClose = () => {
     dispatch(clearSelectedCharacter());
   };
@@ -45,7 +49,13 @@ const CharacterModal: React.FC = () => {
           <p className="text-lg text-[#003B5C]"><strong>Number of Films:</strong> {character.films.length}</p>
           <p className="text-lg text-[#003B5C]"><strong>Date Added:</strong> {dayjs(character.created).format('DD-MM-YYYY')}</p>
 
-          {homeworldStatus === 'loading' && <p className="text-lg text-[#003B5C]">Loading homeworld data...</p>}
+          {homeworldStatus === 'loading' && (
+            <div className="border-t border-[#003B5C] pt-4 mt-4">
+              <p className="text-lg text-[#003B5C] mb-32">Loading homeworld data...</p>
+            </div>
+          )}
+
+
           {homeworldStatus === 'succeeded' && homeworld && (
             <div className="border-t border-[#003B5C] pt-4 mt-4">
               <h3 className="text-xl font-semibold mb-2 text-[#003B5C]">Homeworld</h3>
