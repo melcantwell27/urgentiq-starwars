@@ -3,6 +3,8 @@
 ## Project Description
 The Star Wars Galactic Hub is a web application that allows users to explore various characters from the Star Wars universe. Users can search for characters, view detailed information about each character, and navigate through multiple pages of characters.
 
+![Site Demo](Demo.gif)
+
 ## Features
 - Search for Star Wars characters.
 - View detailed information about each character.
